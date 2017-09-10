@@ -29,3 +29,13 @@ In case there are new versions of the images then run the following commands (as
 ```bash
 docker-compose stop && docker-compose rm && docker-compose up -d
 ```
+
+## Switch between apache-based and fpm-based version
+
+Remove the `docker-compose.yml`
+
+```bash
+rm -rf docker-compose.yml
+```
+
+Then use the commands mentioned above
