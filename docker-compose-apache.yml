@@ -3,7 +3,7 @@ services:
   wordpress-apache-db:
     image: mariadb
     volumes:
-
+      - './data/wordpress/db:/var/lib/mysql'
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: "yes"
       MYSQL_ONETIME_PASSWORD: "yes"
@@ -17,10 +17,12 @@ services:
       - wordpress-apache-db
     ports:
       - "${WEB_PORT}:80"
+    volumes:
+        - './data/wordpress/www:/var/www/html'
     environment:
         WORDPRESS_DB_HOST: wordpress-apache-db:/var/run/mysqld/mysqld.sock
         WORDPRESS_DB_USER: '${WORDPRESS_MYSQL_USER}'
         WORDPRESS_DB_PASSWORD: '${WORDPRESS_MYSQL_PASSWORD}'
         WORDPRESS_ADMIN_USERNAME: '${WORDPRESS_ADMIN_USER}'
         WORDPRESS_ADMIN_PASSWORD: '${WORDPRESS_ADMIN_PASSWORD}'
-        WORDPRESS_URL: '${WORDPRESS_APACHE_URL}'
+        WORDPRESS_URL: '${WORDPRESS_URL}'
